@@ -15,9 +15,10 @@ The application follows a standard MVC architecture with the following component
 
 1. Clone the repository to your local machine.
 2. Ensure you have Java 17 and Maven installed.
-3. Navigate to the project directory and run the application using the Maven wrapper script: 
-./mvnw spring-boot:run
-4. The application will start and listen on port 8080.
+3. Navigate to the project directory and run the application using the Maven wrapper script:
+   ```shell
+   ./mvnw spring-boot:run
+5. The application will start and listen on port 8080.
 
 ## Additional Features
 
