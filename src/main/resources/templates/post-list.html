@@ -1,143 +1,205 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Posts</title>
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            background-color: blanchedalmond;
-            text-align: center;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4; /* Light gray background */
+        text-align: center;
+      }
 
-        .post-card {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            margin: 20px auto;
-            padding: 20px;
-            width: 400px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+      .post-card {
+        border: 1px solid #ddd; /* Lighter border color */
+        border-radius: 10px;
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 600px; /* Increased max-width */
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Softer box shadow */
+      }
 
-        .post-content {
-            margin-bottom: 10px;
-        }
+      .post-content {
+        margin-bottom: 20px; /* Increased margin */
+        color: #333; /* Darker text color */
+      }
 
-        .post-meta {
-            font-size: 14px;
-            color: #666;
-        }
+      .post-meta {
+        font-size: 14px;
+        color: #888; /* Softer color */
+        margin-bottom: 10px; /* Increased margin */
+      }
 
-        .button-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-        }
+      .button-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+      }
 
-        .action-button {
-            font-size: 16px;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #947b7b;
-            color: #fff;
-            cursor: pointer;
-            outline: none;
-            text-decoration: none;
-        }
+      .action-button {
+        font-size: 16px;
+        padding: 10px 20px; /* Increased padding */
+        border-radius: 25px; /* Rounder corners */
+        border: none;
+        background-color: #5c8eff; /* Blue button color */
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+        transition: background-color 0.3s ease; /* Smooth transition */
+      }
 
-        .like-button {
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #4CAF50;
-            color: #fff;
-            cursor: pointer;
-            outline: none;
-            margin-top: 10px;
-        }
+      .action-button:hover {
+        background-color: #4b6ae2; /* Darker blue on hover */
+      }
 
-        .unlike-button {
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #f44336;
-            color: #fff;
-            cursor: pointer;
-            outline: none;
-            margin-top: 10px;
-        }
+      .like-button {
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+        margin-top: 10px;
+      }
+
+      .unlike-button {
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #f44336;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+        margin-top: 10px;
+      }
+      .edit-button {
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #8711a2;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+        margin-top: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-<div th:replace="navbar :: navbar"></div>
-<div class="post-container">
-    <h1>Posts</h1>
-    <div th:each="post : ${postList}" class="post-card">
+  <body>
+    <div th:replace="navbar :: navbar"></div>
+    <div class="post-container">
+      <h1>Posts</h1>
+      <div th:each="post, iter : ${postList}" class="post-card">
         <div class="post-content" th:text="${post.content}"></div>
         <div class="post-meta">
-            <!--                <span th:text="'Author: ' + ${post.author}">abc</span><br>-->
-            <span th:text="'Created at: ' + ${post.createdAt}"></span><br>
-            <span th:text="'Likes: ' + ${post.likeCount}"></span>
-            <span th:text="'Unlikes: ' + ${post.unlikeCount}"></span>
+          <span th:text="'Created at: ' + ${post.createdAt}"></span><br />
+          <span
+            th:id="${'likeCount_' + iter.index}"
+            th:text="'Likes: ' + ${post.likeCount}"
+          ></span>
+          <span
+            th:id="${'unlikeCount_' + iter.index}"
+            th:text="'Unlikes: ' + ${post.unlikeCount}"
+          ></span>
         </div>
-        <button th:onclick="'likePost(' + ${post.postId} + ')'" class="like-button">Like</button>
-        <button th:onclick="'unlikePost(' + ${post.postId} + ')'" class="unlike-button">Unlike</button>
+        <button
+          th:onclick="'likePost(' + ${iter.index} + ')'"
+          class="like-button"
+        >
+          Like
+        </button>
+        <button
+          th:onclick="'unlikePost(' + ${iter.index} + ')'"
+          class="unlike-button"
+        >
+          Dislike
+        </button>
+        <a
+          class="edit-button"
+          th:href="@{/posts/{postId}/edit(postId=${post.postId})}"
+          >Edit</a
+        >
+      </div>
     </div>
-</div>
-<div class="button-container">
-    <a href="/posts/add" class="action-button">New Post</a>
-</div>
+    <div class="button-container">
+      <a href="/posts/add" class="action-button">New Post</a>
+    </div>
 
-<script>
-        function likePost(postId) {
-            fetch("http://localhost:8080/posts/" + postId + "/like", {
-                method: "POST"
-            })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload();
-                        return response.json();
-                    } else {
-                        throw new Error('Failed to like post');
-                    }
-                })
-                .then(data => {
-                    console.log("Post liked successfully:", data);
-                })
-                .catch(error => {
-                    console.error('Error liking post:', error);
-                });
-        }
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      const postList = /*[[${postList}]]*/ [];
 
-        function unlikePost(postId) {
-            fetch("http://localhost:8080/posts/" + postId + "/unlike", {
-                method: "POST"
-            })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload();
-                        return response.json();
-                    } else {
-                        throw new Error('Failed to unlike post');
-                    }
-                })
-                .then(data => {
-                    console.log("Post unliked successfully:", data);
-                })
-                .catch(error => {
-                    console.error('Error unliking post:', error);
-                });
-        }
+      function likePost(index) {
+        fetch(`http://localhost:8080/posts/${getPostIdByIndex(index)}/like`, {
+          method: "POST",
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to like post");
+            }
+          })
+          .then((data) => {
+            console.log("Post liked successfully:", data);
+            updateLikeCounts(index);
+          })
+          .catch((error) => {
+            console.error("Error liking post:", error);
+          });
+      }
 
+      function unlikePost(index) {
+        fetch(`http://localhost:8080/posts/${getPostIdByIndex(index)}/unlike`, {
+          method: "POST",
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to unlike post");
+            }
+          })
+          .then((data) => {
+            console.log("Post unliked successfully:", data);
+            updateUnlikeCounts(index);
+          })
+          .catch((error) => {
+            console.error("Error unliking post:", error);
+          });
+      }
+
+      function updateLikeCounts(index) {
+        const likeCountElement = document.getElementById(`likeCount_${index}`);
+        const currentLikeCount = parseInt(
+          likeCountElement.textContent.split(": ")[1]
+        );
+        likeCountElement.textContent = `Likes: ${currentLikeCount + 1}`;
+      }
+
+      function updateUnlikeCounts(index) {
+        const unlikeCountElement = document.getElementById(
+          `unlikeCount_${index}`
+        );
+        const currentUnlikeCount = parseInt(
+          unlikeCountElement.textContent.split(": ")[1]
+        );
+        unlikeCountElement.textContent = `Unlikes: ${currentUnlikeCount + 1}`;
+      }
+
+      function getPostIdByIndex(index) {
+        const post = postList[index];
+        return post.postId;
+      }
+      /*]]>*/
     </script>
-</body>
-
+  </body>
 </html>

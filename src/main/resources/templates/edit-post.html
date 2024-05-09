@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Post</title>
+    <!-- Include your existing CSS styles -->
+  </head>
+  <body>
+    <div th:replace="navbar :: navbar"></div>
+    <div class="container">
+      <h1>Edit Post</h1>
+      <form
+        th:action="@{/posts/{postId}(postId=${post.postId})}"
+        th:object="${post}"
+        method="post"
+      >
+        <div>
+          <label for="content">Content:</label>
+          <textarea
+            id="content"
+            th:field="*{content}"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+        <button type="submit">Update Post</button>
+      </form>
+    </div>
+  </body>
+</html>

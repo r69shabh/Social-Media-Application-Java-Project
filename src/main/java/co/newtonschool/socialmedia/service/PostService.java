@@ -8,4 +8,6 @@ public interface PostService {
     ResponseEntity<?> createPost(PostRequest postRequest);
     ResponseEntity<?> likePost(int postId);
     ResponseEntity<?> unlikePost(int postId);
+    ResponseEntity<?> getPostById(int postId);
+    void updatePost(int postId, PostRequest postRequest); 
 }

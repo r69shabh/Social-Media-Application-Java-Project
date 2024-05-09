@@ -9,6 +9,7 @@ public class Post {
     private int likeCount;
     private int unlikeCount;
 
+    // Constructor
     public Post(String content) {
         this.content = content;
         this.createdAt = LocalDateTime.now();
@@ -16,6 +17,7 @@ public class Post {
         this.unlikeCount = 0;
     }
 
+    // Getter and Setter for postId
     public int getPostId() {
         return postId;
     }
@@ -24,6 +26,7 @@ public class Post {
         this.postId = postId;
     }
 
+    // Getter and Setter for content
     public String getContent() {
         return content;
     }
@@ -40,6 +43,7 @@ public class Post {
         this.createdAt = createdAt;
     }
 
+    // Getter and Setter for likeCount
     public int getLikeCount() {
         return likeCount;
     }
@@ -48,6 +52,7 @@ public class Post {
         this.likeCount = likeCount;
     }
 
+    // Getter and Setter for unlikeCount
     public int getUnlikeCount() {
         return unlikeCount;
     }
@@ -56,59 +61,3 @@ public class Post {
         this.unlikeCount = unlikeCount;
     }
 }
-
-// class PostResponse {
-//     private int postId;
-//     private String content;
-//     private LocalDateTime createdAt;
-//     private int likeCount;
-//     private int unlikeCount;
-
-//     public PostResponse(int postId, String content, LocalDateTime createdAt, int likeCount, int unlikeCount) {
-//         this.postId = postId;
-//         this.content = content;
-//         this.createdAt = createdAt;
-//         this.likeCount = likeCount;
-//         this.unlikeCount = unlikeCount;
-//     }
-//     public Long getPostId() {
-//         return postId;
-//     }
-
-//     public void setPostId(Long postId) {
-//         this.postId = postId;
-//     }
-
-//     public String getContent() {
-//         return content;
-//     }
-
-//     public void setContent(String content) {
-//         this.content = content;
-//     }
-
-//     public LocalDateTime getCreatedAt() {
-//         return createdAt;
-//     }
-
-//     public void setCreatedAt(LocalDateTime createdAt) {
-//         this.createdAt = createdAt;
-//     }
-
-//     public int getLikeCount() {
-//         return likeCount;
-//     }
-
-//     public void setLikeCount(int likeCount) {
-//         this.likeCount = likeCount;
-//     }
-
-//     public int getUnlikeCount() {
-//         return unlikeCount;
-//     }
-
-//     public void setUnlikeCount(int unlikeCount) {
-//         this.unlikeCount = unlikeCount;
-//     }
-// }
-
