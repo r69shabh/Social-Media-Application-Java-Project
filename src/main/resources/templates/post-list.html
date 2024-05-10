@@ -13,13 +13,18 @@
       }
 
       .post-card {
-        border: 1px solid #ddd; /* Lighter border color */
+        border: 1px solid #ddd;
         border-radius: 10px;
         margin: 20px auto;
         padding: 20px;
-        max-width: 600px; /* Increased max-width */
+        max-width: 600px;
         background-color: #fff;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Softer box shadow */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .post-card:hover {
+        transform: scale(1.02);
       }
 
       .post-content {
@@ -90,6 +95,22 @@
         outline: none;
         margin-top: 10px;
       }
+
+      .animate {
+          animation: pulse 1s;
+      }
+
+      @keyframes pulse {
+          0% {
+              transform: scale(1);
+          }
+          50% {
+              transform: scale(1.1);
+          }
+          100% {
+              transform: scale(1);
+          }
+      }
     </style>
   </head>
 
@@ -111,12 +132,14 @@
           ></span>
         </div>
         <button
+          id="likeButton_${iter.index}"
           th:onclick="'likePost(' + ${iter.index} + ')'"
           class="like-button"
         >
           Like
         </button>
         <button
+          id="unlikeButton_${iter.index}"
           th:onclick="'unlikePost(' + ${iter.index} + ')'"
           class="unlike-button"
         >
@@ -151,6 +174,7 @@
           .then((data) => {
             console.log("Post liked successfully:", data);
             updateLikeCounts(index);
+            animateButton(index, 'like');
           })
           .catch((error) => {
             console.error("Error liking post:", error);
@@ -171,10 +195,20 @@
           .then((data) => {
             console.log("Post unliked successfully:", data);
             updateUnlikeCounts(index);
+            animateButton(index, 'unlike');
           })
           .catch((error) => {
             console.error("Error unliking post:", error);
           });
+      }
+
+      function animateButton(index, type) {
+        const button = document.getElementById(`${type}Button_${index}`);
+        button.classList.add('animate');
+
+        setTimeout(() => {
+            button.classList.remove('animate');
+        }, 1000); // Remove the animation class after 1 second
       }
 
       function updateLikeCounts(index) {

@@ -16,14 +16,19 @@
       form {
         display: flex;
         flex-direction: column;
-        gap: 20px; /* Increased gap */
+        gap: 20px;
         text-align: left;
-        max-width: 400px; /* Reduced width for better responsiveness */
-        margin: 100px auto; /* Adjusted margin */
+        max-width: 400px;
+        margin: 100px auto;
         padding: 40px;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft box shadow */
-        background-color: #fff; /* White background */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        transition: box-shadow 0.3s ease;
+      }
+
+      form:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
       }
 
       textarea {

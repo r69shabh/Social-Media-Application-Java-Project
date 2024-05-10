@@ -3,7 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <title>Edit Post</title>
-    <!-- Include your existing CSS styles -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 0;
+        margin: 0;
+        background-color: #f4f4f4; /* Light gray background */
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: left;
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        transition: box-shadow 0.3s ease;
+      }
+      .container:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+      textarea {
+        font-size: 16px; /* Reduced font size */
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        outline: none;
+        padding: 10px; /* Increased padding */
+        resize: vertical; /* Allow vertical resizing */
+      }
+      h1 {
+        margin-bottom: 20px; /* Increased margin */
+      }
+      button {
+        font-size: 16px; /* Reduced font size */
+        padding: 10px 20px; /* Increased padding */
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        background-color: #5c8eff; /* Blue button color */
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth transition */
+      }
+      button:hover {
+        background-color: #4b6ae2; /* Darker blue on hover */
+      }
+    </style>
   </head>
   <body>
     <div th:replace="navbar :: navbar"></div>
